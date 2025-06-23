@@ -11,7 +11,7 @@ class RefreshLoginTest extends BaseTestCase
     public function test_it_should_not_refresh_login_a_user(): void
     {
         $path = 'tests/Fixtures/Api/Auth/invalid-refresh-token.json';
-        $body = file_get_contents(base_path($path));
+        $body = json_decode(file_get_contents(base_path($path)), true, 512, JSON_THROW_ON_ERROR);
 
         Http::fake([
             config('services.auth_service_api.url') . '/api/auth/refresh' => Http::response(
