@@ -1,6 +1,7 @@
 <?php
 
 use App\Exceptions\Json\HttpJsonException;
+use App\Http\Middleware\EnsureAccessTokenIsValid;
 use App\Support\Traits\Http\Templates\Requests\Api\ResponseTemplate;
 use Illuminate\Foundation\Application;
 use Illuminate\Auth\AuthenticationException;
@@ -24,7 +25,9 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'jwt.verify' => EnsureAccessTokenIsValid::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (AuthenticationException $exception, Request $request) {

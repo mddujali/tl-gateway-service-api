@@ -2,12 +2,15 @@
 
 namespace Tests\Feature\Api\Auth;
 
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Tests\Feature\Api\BaseTestCase;
 
 class LogoutTest extends BaseTestCase
 {
+    use WithoutMiddleware;
+
     public function test_it_should_return_unauthorized(): void
     {
         $path = 'tests/Fixtures/Api/Auth/unauthenticated.json';

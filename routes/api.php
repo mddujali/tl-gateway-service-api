@@ -15,5 +15,6 @@ Route::prefix('auth')
             ->name('refresh');
 
         Route::post('logout', LogoutController::class)
-            ->name('logout');
+            ->name('logout')
+            ->middleware('jwt.verify');
     });
