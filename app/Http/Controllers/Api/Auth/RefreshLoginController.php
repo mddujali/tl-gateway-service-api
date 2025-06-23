@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Requests\Api\Auth\LoginRequest;
 use Exception;
+use App\Http\Requests\Api\Auth\RefreshLoginRequest;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 
-class LoginController extends BaseController
+class RefreshLoginController extends BaseController
 {
-    public function __invoke(LoginRequest $request)
+    public function __invoke(RefreshLoginRequest $request)
     {
         try {
             $response = Http::asJson()
                 ->post(
-                    url: config('services.auth_service_api.url') . '/api/auth/login',
+                    url: config('services.auth_service_api.url') . '/api/auth/refresh',
                     data: $request->validated()
                 );
         } catch (ConnectionException) {

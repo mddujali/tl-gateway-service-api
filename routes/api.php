@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RefreshLoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')
@@ -8,4 +9,7 @@ Route::prefix('auth')
     ->group(function () {
         Route::post('login', LoginController::class)
             ->name('login');
+
+        Route::post('refresh', RefreshLoginController::class)
+            ->name('refresh');
     });
