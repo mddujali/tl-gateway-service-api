@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'auth_service_api' => [
+        'url' => env('AUTH_SERVICE_API_URL', 'http://host.docker.internal:4001'),
+    ],
+
 ];
