@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RefreshLoginController;
+use App\Http\Controllers\Api\Profile\GetProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')
@@ -18,3 +19,7 @@ Route::prefix('auth')
             ->name('logout')
             ->middleware('jwt.verify');
     });
+
+Route::get('profile', GetProfileController::class)
+    ->name('profile')
+    ->middleware('jwt.verify');

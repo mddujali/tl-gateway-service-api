@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Api\Profile;
 
 use App\Http\Controllers\Api\BaseController;
 use Exception;
@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 
-class LogoutController extends BaseController
+class GetProfileController extends BaseController
 {
     public function __invoke(Request $request)
     {
         try {
             $response = Http::asJson()
                 ->withToken($request->bearerToken())
-                ->post(
-                    url: config('services.auth_service_api.url') . '/api/auth/logout',
+                ->get(
+                    url: config('services.auth_service_api.url') . '/api/profile'
                 );
         } catch (ConnectionException) {
             return $this->errorResponse(

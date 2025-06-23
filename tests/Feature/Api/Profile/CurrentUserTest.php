@@ -1,35 +1,32 @@
 <?php
 
-namespace Tests\Feature\Api\Auth;
+namespace Tests\Feature\Api\Profile;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Tests\Feature\Api\BaseTestCase;
 
-class LogoutTest extends BaseTestCase
+class CurrentUserTest extends BaseTestCase
 {
     use WithoutMiddleware;
 
     public function test_it_should_return_unauthorized(): void
     {
         $path = 'tests/Fixtures/Api/Auth/unauthenticated.json';
-        $body = file_get_contents(base_path($path));
+        $body = json_decode(file_get_contents(base_path($path)), true, 512, JSON_THROW_ON_ERROR);
 
         Http::fake([
-            config('services.auth_service_api.url') . '/api/auth/logout' => Http::response(
+            config('services.auth_service_api.url') . '/api/profile' => Http::response(
                 body: $body,
                 status: Response::HTTP_UNAUTHORIZED
             ),
         ]);
 
         $response = $this->json(
-            method: 'post',
-            uri: route('api.auth.logout'),
-            headers: [
-                ...$this->headers,
-                'Authorization' => 'Bearer ' . fake()->uuid,
-            ]
+            method: 'get',
+            uri: route('api.profile'),
+            headers: $this->headers
         );
 
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
@@ -40,22 +37,22 @@ class LogoutTest extends BaseTestCase
         ]);
     }
 
-    public function test_it_should_logout_a_user(): void
+    public function test_it_should_return_current_user_profile(): void
     {
-        $path = 'tests/Fixtures/Api/Auth/invalidate-token.json';
+        $path = 'tests/Fixtures/Api/Profile/current-user.json';
         $body = json_decode(file_get_contents(base_path($path)), true, 512, JSON_THROW_ON_ERROR);
         $token = $this->generateToken();
 
         Http::fake([
-            config('services.auth_service_api.url') . '/api/auth/logout' => Http::response(
+            config('services.auth_service_api.url') . '/api/profile' => Http::response(
                 body: $body,
                 status: Response::HTTP_OK
             ),
         ]);
 
         $response = $this->json(
-            method: 'post',
-            uri: route('api.auth.logout'),
+            method: 'get',
+            uri: route('api.profile'),
             headers: [
                 ...$this->headers,
                 'Authorization' => 'Bearer ' . $token['data']['access_token'],
@@ -65,7 +62,14 @@ class LogoutTest extends BaseTestCase
         $response->assertStatus(Response::HTTP_OK);
         $response->assertExactJsonStructure([
             'message',
-            'data',
+            'data' => [
+                'id',
+                'name',
+                'email',
+                'role',
+                'created_at',
+                'updated_at',
+            ],
         ]);
     }
 }
