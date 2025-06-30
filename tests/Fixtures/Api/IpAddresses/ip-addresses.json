@@ -1,0 +1,85 @@
+{
+    "message": "Success.",
+    "data": [
+        {
+            "id": 1,
+            "ip_address": "150.82.242.194",
+            "label": "est",
+            "comment": "Quo quia reiciendis sunt qui aut tenetur.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-29T06:59:06.000000Z"
+        },
+        {
+            "id": 2,
+            "ip_address": "121.52.93.208",
+            "label": "id",
+            "comment": "Velit eum est cumque officia sint beatae et dolor.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 3,
+            "ip_address": "103.100.209.126",
+            "label": "est",
+            "comment": "Praesentium id laudantium et beatae delectus.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 4,
+            "ip_address": "21.213.214.190",
+            "label": "et",
+            "comment": "Quis earum sit quo iure.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 5,
+            "ip_address": "47.75.77.245",
+            "label": "blanditiis",
+            "comment": "Autem illo ipsum repellat nostrum aut sit.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 6,
+            "ip_address": "66.72.226.74",
+            "label": "explicabo",
+            "comment": "Rerum sunt quisquam velit in fugiat.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 7,
+            "ip_address": "134.183.60.59",
+            "label": "molestiae",
+            "comment": "Debitis eos enim beatae omnis ut odio.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 8,
+            "ip_address": "88.226.146.240",
+            "label": "rerum",
+            "comment": "Labore quia rerum et autem ex.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 9,
+            "ip_address": "146.228.224.195",
+            "label": "non",
+            "comment": "Et omnis esse voluptas sunt accusantium.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        },
+        {
+            "id": 10,
+            "ip_address": "21.20.84.244",
+            "label": "sequi",
+            "comment": "Modi libero temporibus repudiandae nam qui voluptates.",
+            "created_at": "2025-06-24T00:49:20.000000Z",
+            "updated_at": "2025-06-24T00:49:20.000000Z"
+        }
+    ]
+}

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RefreshLoginController;
+use App\Http\Controllers\Api\IpAddressController;
 use App\Http\Controllers\Api\Profile\GetProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,7 @@ Route::prefix('auth')
 Route::get('profile', GetProfileController::class)
     ->name('profile')
     ->middleware('jwt.verify');
+
+Route::apiResource('ip-addresses', IpAddressController::class)
+    ->except(['destroy'])
+    ->parameters(['ip-addresses' => 'ip_address_id']);
