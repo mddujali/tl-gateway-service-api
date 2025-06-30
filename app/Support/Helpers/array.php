@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Collection;
 
-if (!function_exists('array_flatten')) {
+if ( ! function_exists('array_flatten')) {
     function array_flatten(array $array): array
     {
         $result = [];
@@ -22,7 +22,7 @@ if (!function_exists('array_flatten')) {
 }
 
 
-if (!function_exists('array_equal')) {
+if ( ! function_exists('array_equal')) {
     function array_equal(array $default, array $defined): bool
     {
         $defaultCollection = Collection::make($default)->sort()->values();

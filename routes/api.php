@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RefreshLoginController;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')
     ->name('auth.')
-    ->group(function () {
+    ->group(function (): void {
         Route::post('login', LoginController::class)
             ->name('login');
 

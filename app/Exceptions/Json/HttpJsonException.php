@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions\Json;
 
 use Illuminate\Http\Response;
@@ -18,7 +20,7 @@ class HttpJsonException extends JsonException
         $statusText = Response::$statusTexts[$status];
 
         $this->status = $status;
-        $this->errorCode = !blank($errorCode) ? studly($errorCode) : studly($statusText);
+        $this->errorCode = ! blank($errorCode) ? studly($errorCode) : studly($statusText);
     }
 
     public function getStatus(): int

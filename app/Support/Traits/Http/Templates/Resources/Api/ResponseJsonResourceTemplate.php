@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Traits\Http\Templates\Resources\Api;
 
 use Illuminate\Http\Response;

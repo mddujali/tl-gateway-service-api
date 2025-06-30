@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Exceptions\Json\HttpJsonException;
 use App\Http\Middleware\EnsureAccessTokenIsValid;
 use App\Support\Traits\Http\Templates\Requests\Api\ResponseTemplate;
-use Illuminate\Foundation\Application;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
@@ -24,12 +26,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->group(base_path('routes/web.php'));
         },
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'jwt.verify' => EnsureAccessTokenIsValid::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (AuthenticationException $exception, Request $request) {
             if ($request->is('api/*')) {
                 $status = Response::HTTP_UNAUTHORIZED;
@@ -53,10 +55,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 $status = $exception->getStatus() !== 419
                     ? $exception->getStatus()
                     : Response::HTTP_FORBIDDEN;
-                $errorCode = !blank($exception->getErrorCode())
+                $errorCode = ! blank($exception->getErrorCode())
                     ? $exception->getErrorCode()
                     : studly(Response::$statusTexts[$status]);
-                $message = !blank($exception->getMessage())
+                $message = ! blank($exception->getMessage())
                     ? $exception->getMessage()
                     : Response::$statusTexts[$status];
                 $errors = $exception->getErrors();
