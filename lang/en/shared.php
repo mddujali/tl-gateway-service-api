@@ -17,5 +17,12 @@ return [
     'common' => [
         'success' => 'Success.',
         'error' => 'Failure.',
+        'exception' => 'Something went wrong, please try again later.',
+    ],
+    'auth_service' => [
+        'connection_exception' => 'Failed to connect to the authentication service.',
+    ],
+    'ip_service' => [
+        'connection_exception' => 'Failed to connect to the IP service.',
     ],
 ];

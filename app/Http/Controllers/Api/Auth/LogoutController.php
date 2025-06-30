@@ -24,12 +24,12 @@ class LogoutController extends BaseController
         } catch (ConnectionException) {
             return $this->errorResponse(
                 status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('Failed to connect to the authentication service.')
+                message: __('shared.auth_service.connection_exception')
             );
         } catch (Exception) {
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
-                message: __('Something went wrong, please try again later.')
+                message: __('shared.common.exception')
             );
         }
 

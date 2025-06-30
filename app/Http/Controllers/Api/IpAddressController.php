@@ -25,12 +25,12 @@ class IpAddressController extends BaseController
         } catch (ConnectionException) {
             return $this->errorResponse(
                 status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('Failed to connect to the IP service.')
+                message: __('shared.ip_service.connection_exception')
             );
         } catch (Exception) {
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
-                message: __('Something went wrong, please try again later.')
+                message: __('shared.common.exception')
             );
         }
 
@@ -49,12 +49,12 @@ class IpAddressController extends BaseController
         } catch (ConnectionException) {
             return $this->errorResponse(
                 status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('Failed to connect to the IP service.')
+                message: __('shared.ip_service.connection_exception')
             );
         } catch (Exception) {
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
-                message: __('Something went wrong, please try again later.')
+                message: __('shared.common.exception')
             );
         }
 
@@ -72,12 +72,12 @@ class IpAddressController extends BaseController
         } catch (ConnectionException) {
             return $this->errorResponse(
                 status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('Failed to connect to the IP service.')
+                message: __('shared.ip_service.connection_exception')
             );
         } catch (Exception) {
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
-                message: __('Something went wrong, please try again later.')
+                message: __('shared.common.exception')
             );
         }
 
@@ -96,12 +96,12 @@ class IpAddressController extends BaseController
         } catch (ConnectionException) {
             return $this->errorResponse(
                 status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('Failed to connect to the IP service.')
+                message: __('shared.ip_service.connection_exception')
             );
         } catch (Exception) {
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
-                message: __('Something went wrong, please try again later.')
+                message: __('shared.common.exception')
             );
         }
 
