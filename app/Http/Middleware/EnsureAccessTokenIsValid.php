@@ -26,7 +26,9 @@ class EnsureAccessTokenIsValid
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            JWTAuth::parseToken()->getPayload();
+            $payload = JWTAuth::parseToken()->getPayload();
+
+            $request->attributes->set('user_id', $payload->get('sub'));
         } catch (Exception $exception) {
             return match (true) {
                 $exception instanceof TokenExpiredException => $this->errorResponse(
