@@ -34,7 +34,7 @@ class GetIpAddressesTest extends BaseTestCase
         ]);
     }
 
-    public function test_it_should_get_a_list_of_ip_addresses(): void
+    public function test_it_should_return_list_of_ip_addresses(): void
     {
         $path = 'tests/Fixtures/Api/IpAddresses/ip-addresses.json';
         $body = file_get_contents(base_path($path));
