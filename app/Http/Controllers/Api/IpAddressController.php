@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Http;
 
 class IpAddressController extends BaseController
 {
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
             $response = Http::asJson()
+                ->withToken($request->bearerToken())
                 ->get(
                     url: config('services.ip_service_api.url') . '/api/ip-addresses',
                 );
@@ -38,6 +39,7 @@ class IpAddressController extends BaseController
     {
         try {
             $response = Http::asJson()
+                ->withToken($request->bearerToken())
                 ->post(
                     url: config('services.ip_service_api.url') . '/api/ip-addresses',
                     data: $request->validated()
@@ -61,6 +63,7 @@ class IpAddressController extends BaseController
     {
         try {
             $response = Http::asJson()
+                ->withToken($request->bearerToken())
                 ->get(
                     url: config('services.ip_service_api.url') . '/api/ip-addresses/' . $request->route('ip_address_id'),
                 );
@@ -83,6 +86,7 @@ class IpAddressController extends BaseController
     {
         try {
             $response = Http::asJson()
+                ->withToken($request->bearerToken())
                 ->put(
                     url: config('services.ip_service_api.url') . '/api/ip-addresses/' . $request->route('ip_address_id'),
                     data: $request->validated()

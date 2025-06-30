@@ -2,16 +2,20 @@
 
 namespace Tests\Feature\Api\IpAddresses;
 
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Tests\Feature\Api\BaseTestCase;
 
 class StoreIpAddressTest extends BaseTestCase
 {
+    use WithoutMiddleware;
+
     public function test_it_should_return_service_unavailable(): void
     {
         $path = 'tests/Fixtures/Api/IpAddresses/service-unavailable.json';
         $body = file_get_contents(base_path($path));
+        $token = $this->generateToken();
 
         Http::fake([
             config('services.ip_service_api.url') . '/api/ip-addresses' => Http::response(
@@ -24,7 +28,10 @@ class StoreIpAddressTest extends BaseTestCase
             method: 'post',
             uri: route('api.ip-addresses.store'),
             data: $this->requestData(),
-            headers: $this->headers
+            headers: [
+                ...$this->headers,
+                'Authorization' => 'Bearer ' . $token['data']['access_token'],
+            ]
         );
 
         $response->assertStatus(Response::HTTP_SERVICE_UNAVAILABLE);
@@ -39,6 +46,7 @@ class StoreIpAddressTest extends BaseTestCase
     {
         $path = 'tests/Fixtures/Api/IpAddresses/ip-address.json';
         $body = file_get_contents(base_path($path));
+        $token = $this->generateToken();
 
         Http::fake([
             config('services.ip_service_api.url') . '/api/ip-addresses' => Http::response(
@@ -51,7 +59,10 @@ class StoreIpAddressTest extends BaseTestCase
             method: 'post',
             uri: route('api.ip-addresses.store'),
             data: $this->requestData(),
-            headers: $this->headers
+            headers: [
+                ...$this->headers,
+                'Authorization' => 'Bearer ' . $token['data']['access_token'],
+            ]
         );
 
         $response->assertStatus(Response::HTTP_CREATED);
