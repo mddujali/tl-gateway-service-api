@@ -22,17 +22,23 @@ class IpAddressController extends BaseController
                 ->get(
                     url: config('services.ip_service_api.url') . '/api/ip-addresses',
                 );
-        } catch (ConnectionException) {
-            return $this->errorResponse(
-                status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('shared.ip_service.connection_exception')
-            );
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            $this->handleAuditLogError($request, $exception, __('Unable to fetch IP Addresses.'));
+
+            if ($exception instanceof ConnectionException) {
+                return $this->errorResponse(
+                    status: Response::HTTP_SERVICE_UNAVAILABLE,
+                    message: __('shared.ip_service.connection_exception')
+                );
+            }
+
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
                 message: __('shared.common.exception')
             );
         }
+
+        $this->handleAuditLogInfo($request, __('IP Addresses has been fetched.'));
 
         return $this->resolveResponse($response);
     }
@@ -47,6 +53,13 @@ class IpAddressController extends BaseController
                     data: $request->validated()
                 );
         } catch (Exception $exception) {
+            $this->handleAuditLogError(
+                $request,
+                $exception,
+                __('Unable to create IP Address.'),
+                ['payload' => $request->validated()]
+            );
+
             if ($exception instanceof ConnectionException) {
                 return $this->errorResponse(
                     status: Response::HTTP_SERVICE_UNAVAILABLE,
@@ -59,6 +72,12 @@ class IpAddressController extends BaseController
                 message: __('shared.common.exception')
             );
         }
+
+        $this->handleAuditLogInfo(
+            $request,
+            __('IP Address has been created.'),
+            ['payload' => $request->validated()]
+        );
 
         return $this->resolveResponse($response);
     }
@@ -72,6 +91,13 @@ class IpAddressController extends BaseController
                     url: config('services.ip_service_api.url') . '/api/ip-addresses/' . $request->route('ip_address_id'),
                 );
         } catch (Exception $exception) {
+            $this->handleAuditLogError(
+                $request,
+                $exception,
+                __('Unable to fetch IP Address.'),
+                ['ip_address_id' => $request->route('ip_address_id')]
+            );
+
             if ($exception instanceof ConnectionException) {
                 return $this->errorResponse(
                     status: Response::HTTP_SERVICE_UNAVAILABLE,
@@ -84,6 +110,12 @@ class IpAddressController extends BaseController
                 message: __('shared.common.exception')
             );
         }
+
+        $this->handleAuditLogInfo(
+            $request,
+            __('IP Address has been fetched.'),
+            ['ip_address_id' => $request->route('ip_address_id')]
+        );
 
         return $this->resolveResponse($response);
     }
@@ -98,6 +130,16 @@ class IpAddressController extends BaseController
                     data: $request->validated()
                 );
         } catch (Exception $exception) {
+            $this->handleAuditLogError(
+                $request,
+                $exception,
+                __('Unable to edit IP Address.'),
+                [
+                    'ip_address_id' => $request->route('ip_address_id'),
+                    'payload' => $request->validated(),
+                ]
+            );
+
             if ($exception instanceof ConnectionException) {
                 return $this->errorResponse(
                     status: Response::HTTP_SERVICE_UNAVAILABLE,
@@ -110,6 +152,16 @@ class IpAddressController extends BaseController
                 message: __('shared.common.exception')
             );
         }
+
+        $this->handleAuditLogInfo(
+            $request,
+            __('IP Address has been edited.'),
+            [
+                'ip_address_id' => $request->route('ip_address_id'),
+                'payload' => $request->validated(),
+            ]
+        );
+
         return $this->resolveResponse($response);
     }
 }
