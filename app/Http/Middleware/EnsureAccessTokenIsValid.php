@@ -42,7 +42,7 @@ class EnsureAccessTokenIsValid
         try {
             $payload = JWTAuth::parseToken()->getPayload();
 
-            $request->attributes->set('user_id', $userId = $payload->get('sub'));
+            $request->attributes->set('user_id', $userId = (int) $payload->get('sub'));
         } catch (Exception $exception) {
             $context['exception'] = $exception::class;
             $context['message'] = $exception->getMessage();
