@@ -39,10 +39,20 @@ class RefreshLoginController extends BaseController
 
         if ($response->failed()) {
             $this->handleAuditLogError(request: $request, message: __('Refresh token attempt failed.'));
-        } else {
-            $this->handleAuditLogInfo($request, __('Refresh token attempt successful.'));
+
+            return $this->resolveResponse($response);
         }
 
-        return $this->resolveResponse($response);
+        $request->attributes->set('user_id', $response->json('data.user.id'));
+
+        $this->handleAuditLogInfo($request, __('Refresh token attempt successful.'));
+
+        return response()->json(
+            data: [
+                'message' => $response->json('message'),
+                'data' => $response->json('data.token'),
+            ],
+            status: $response->status()
+        );
     }
 }
