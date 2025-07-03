@@ -48,6 +48,7 @@ abstract class BaseController extends Controller
             type: AuditLogType::ERROR,
             message: $message,
             context: $context,
+            userId: $request->attributes->get('user_id') ? (int) $request->attributes->get('user_id') : null,
         );
     }
 
@@ -63,6 +64,7 @@ abstract class BaseController extends Controller
             type: AuditLogType::INFO,
             message: $message,
             context: $context,
+            userId: $request->attributes->get('user_id') ? (int) $request->attributes->get('user_id') : null,
         );
     }
 }

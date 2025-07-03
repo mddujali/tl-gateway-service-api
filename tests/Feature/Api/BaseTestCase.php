@@ -17,7 +17,7 @@ abstract class BaseTestCase extends TestCase
 
     protected function generateToken(): array
     {
-        $path = 'tests/Fixtures/Api/Auth/authenticated.json';
+        $path = 'tests/Fixtures/Api/Auth/generate-token.json';
 
         return json_decode(file_get_contents(base_path($path)), true, 512, JSON_THROW_ON_ERROR);
     }

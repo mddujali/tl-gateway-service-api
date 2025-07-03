@@ -1,0 +1,9 @@
+{
+    "message": "Success.",
+    "data": {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vaG9zdC5kb2NrZXIuaW50ZXJuYWw6NDAwMS9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc1MDYwNTkwOSwiZXhwIjoxNzUwNjA1OTY5LCJuYmYiOjE3NTA2MDU5MDksImp0aSI6Ik1UdVd3TG9qdGdJaTVqMUsiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.w-ILaIMVlPahpc4nIWf9qrUfU_thArwmiYTIxX57Qfo",
+        "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vaG9zdC5kb2NrZXIuaW50ZXJuYWw6NDAwMS9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc1MDYwNTkwOSwiZXhwIjoyMDY2MTM4NzA5LCJuYmYiOjE3NTA2MDU5MDksImp0aSI6IkdERVFPZmY3S3Jjd1BlSE0iLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJlZnJlc2giOnRydWV9.jGjB4C1Wi5eseQStPkBIpX_l7LM7QxMe30gTTBwbTvo",
+        "token_type": "Bearer",
+        "expires_in": 3600
+    }
+}
