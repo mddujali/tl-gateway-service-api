@@ -46,12 +46,14 @@ class IpAddressController extends BaseController
                     url: config('services.ip_service_api.url') . '/api/ip-addresses',
                     data: $request->validated()
                 );
-        } catch (ConnectionException) {
-            return $this->errorResponse(
-                status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('shared.ip_service.connection_exception')
-            );
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            if ($exception instanceof ConnectionException) {
+                return $this->errorResponse(
+                    status: Response::HTTP_SERVICE_UNAVAILABLE,
+                    message: __('shared.ip_service.connection_exception')
+                );
+            }
+
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
                 message: __('shared.common.exception')
@@ -69,12 +71,14 @@ class IpAddressController extends BaseController
                 ->get(
                     url: config('services.ip_service_api.url') . '/api/ip-addresses/' . $request->route('ip_address_id'),
                 );
-        } catch (ConnectionException) {
-            return $this->errorResponse(
-                status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('shared.ip_service.connection_exception')
-            );
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            if ($exception instanceof ConnectionException) {
+                return $this->errorResponse(
+                    status: Response::HTTP_SERVICE_UNAVAILABLE,
+                    message: __('shared.ip_service.connection_exception')
+                );
+            }
+
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
                 message: __('shared.common.exception')
@@ -93,18 +97,19 @@ class IpAddressController extends BaseController
                     url: config('services.ip_service_api.url') . '/api/ip-addresses/' . $request->route('ip_address_id'),
                     data: $request->validated()
                 );
-        } catch (ConnectionException) {
-            return $this->errorResponse(
-                status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('shared.ip_service.connection_exception')
-            );
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            if ($exception instanceof ConnectionException) {
+                return $this->errorResponse(
+                    status: Response::HTTP_SERVICE_UNAVAILABLE,
+                    message: __('shared.ip_service.connection_exception')
+                );
+            }
+
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
                 message: __('shared.common.exception')
             );
         }
-
         return $this->resolveResponse($response);
     }
 }

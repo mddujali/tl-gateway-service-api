@@ -21,12 +21,14 @@ class GetProfileController extends BaseController
                 ->get(
                     url: config('services.auth_service_api.url') . '/api/profile'
                 );
-        } catch (ConnectionException) {
-            return $this->errorResponse(
-                status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('shared.auth_service.connection_exception')
-            );
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            if ($exception instanceof ConnectionException) {
+                return $this->errorResponse(
+                    status: Response::HTTP_SERVICE_UNAVAILABLE,
+                    message: __('shared.auth_service.connection_exception')
+                );
+            }
+
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
                 message: __('shared.common.exception')
