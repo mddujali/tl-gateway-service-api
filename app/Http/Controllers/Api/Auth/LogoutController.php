@@ -21,16 +21,26 @@ class LogoutController extends BaseController
                 ->post(
                     url: config('services.auth_service_api.url') . '/api/auth/logout',
                 );
-        } catch (ConnectionException) {
-            return $this->errorResponse(
-                status: Response::HTTP_SERVICE_UNAVAILABLE,
-                message: __('shared.auth_service.connection_exception')
-            );
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            $this->handleAuditLogError($request, $exception, __('Logout attempt failed.'));
+
+            if ($exception instanceof ConnectionException) {
+                return $this->errorResponse(
+                    status: Response::HTTP_SERVICE_UNAVAILABLE,
+                    message: __('shared.auth_service.connection_exception')
+                );
+            }
+
             return $this->errorResponse(
                 status: Response::HTTP_INTERNAL_SERVER_ERROR,
                 message: __('shared.common.exception')
             );
+        }
+
+        if ($response->failed()) {
+            $this->handleAuditLogError(request: $request, message: __('Logout attempt failed.'));
+        } else {
+            $this->handleAuditLogInfo($request, __('Logout attempt successful.'));
         }
 
         return $this->resolveResponse($response);
