@@ -127,7 +127,11 @@ class IpAddressController extends BaseController
                 ->withToken($request->bearerToken())
                 ->put(
                     url: config('services.ip_service_api.url') . '/api/ip-addresses/' . $request->route('ip_address_id'),
-                    data: $request->validated()
+                    data: [
+                        'user_id' => $request->input('user_id'),
+                        'user_role' => $request->input('user_role'),
+                        ...$request->validated(),
+                    ]
                 );
         } catch (Exception $exception) {
             $this->handleAuditLogError(
