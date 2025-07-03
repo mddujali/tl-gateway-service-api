@@ -43,16 +43,10 @@ class LoginController extends BaseController
             return $this->resolveResponse($response);
         }
 
-        $request->attributes->set('user_id', $response->json('data.user.id'));
+        $this->resolveAuthenticatedAttributes($request, $response);
 
         $this->handleAuditLogInfo($request, __('Login attempt successful.'));
 
-        return response()->json(
-            data: [
-                'message' => $response->json('message'),
-                'data' => $response->json('data.token'),
-            ],
-            status: $response->status()
-        );
+        return $this->resolveAuthenticatedResponse($response);
     }
 }
