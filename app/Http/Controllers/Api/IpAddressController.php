@@ -38,7 +38,11 @@ class IpAddressController extends BaseController
             );
         }
 
-        $this->handleAuditLogInfo($request, __('IP Addresses has been fetched.'));
+        if ($response->failed()) {
+            $this->handleAuditLogError(request: $request, message: __('Unable to fetch IP Addresses.'));
+        } else {
+            $this->handleAuditLogInfo($request, __('IP Addresses has been fetched.'));
+        }
 
         return $this->resolveResponse($response);
     }
@@ -73,11 +77,19 @@ class IpAddressController extends BaseController
             );
         }
 
-        $this->handleAuditLogInfo(
-            $request,
-            __('IP Address has been created.'),
-            ['payload' => $request->validated()]
-        );
+        if ($response->failed()) {
+            $this->handleAuditLogError(
+                request: $request,
+                message: __('Unable to create IP Address.'),
+                context: ['payload' => $request->validated()]
+            );
+        } else {
+            $this->handleAuditLogInfo(
+                $request,
+                __('IP Address has been created.'),
+                ['payload' => $request->validated()]
+            );
+        }
 
         return $this->resolveResponse($response);
     }
@@ -111,11 +123,19 @@ class IpAddressController extends BaseController
             );
         }
 
-        $this->handleAuditLogInfo(
-            $request,
-            __('IP Address has been fetched.'),
-            ['ip_address_id' => $request->route('ip_address_id')]
-        );
+        if ($response->failed()) {
+            $this->handleAuditLogError(
+                request: $request,
+                message: __('Unable to fetch IP Address.'),
+                context: ['ip_address_id' => $request->route('ip_address_id')]
+            );
+        } else {
+            $this->handleAuditLogInfo(
+                $request,
+                __('IP Address has been fetched.'),
+                ['ip_address_id' => $request->route('ip_address_id')]
+            );
+        }
 
         return $this->resolveResponse($response);
     }
@@ -157,14 +177,25 @@ class IpAddressController extends BaseController
             );
         }
 
-        $this->handleAuditLogInfo(
-            $request,
-            __('IP Address has been edited.'),
-            [
-                'ip_address_id' => $request->route('ip_address_id'),
-                'payload' => $request->validated(),
-            ]
-        );
+        if ($response->failed()) {
+            $this->handleAuditLogError(
+                request: $request,
+                message: __('Unable to edit IP Address.'),
+                context: [
+                    'ip_address_id' => $request->route('ip_address_id'),
+                    'payload' => $request->validated(),
+                ]
+            );
+        } else {
+            $this->handleAuditLogInfo(
+                $request,
+                __('IP Address has been edited.'),
+                [
+                    'ip_address_id' => $request->route('ip_address_id'),
+                    'payload' => $request->validated(),
+                ]
+            );
+        }
 
         return $this->resolveResponse($response);
     }
