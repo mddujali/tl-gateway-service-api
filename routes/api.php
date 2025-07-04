@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\AuditLogs\GetAuditLogsController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RefreshLoginController;
@@ -29,4 +30,8 @@ Route::get('profile', GetProfileController::class)
 
 Route::apiResource('ip-addresses', IpAddressController::class)
     ->parameters(['ip-addresses' => 'ip_address_id'])
+    ->middleware('jwt.verify');
+
+Route::get('audit-logs', GetAuditLogsController::class)
+    ->name('audit-logs.index')
     ->middleware('jwt.verify');

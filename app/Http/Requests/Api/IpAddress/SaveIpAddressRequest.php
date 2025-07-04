@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Api\IpAddress;
 
-use Override;
 use App\Http\Requests\Api\BaseRequest;
 use App\Models\User;
+use Override;
 
 class SaveIpAddressRequest extends BaseRequest
 {
