@@ -13,7 +13,7 @@ class GetAuditLogsController extends BaseController
 {
     public function __invoke(Request $request)
     {
-        $auditLogs = AuditLog::query()->get();
+        $auditLogs = AuditLog::query()->with('user')->get();
 
         return (new AuditLogCollection($auditLogs))
             ->setMessage(__('shared.common.success'));

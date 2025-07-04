@@ -20,11 +20,13 @@ class UserTest extends BaseModelTestCase
 
         $this->columns = [
             'id',
+            'name',
             'role',
         ];
 
         $this->fillable = [
             'id',
+            'name',
             'role',
         ];
     }

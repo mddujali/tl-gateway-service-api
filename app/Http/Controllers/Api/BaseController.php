@@ -30,9 +30,10 @@ abstract class BaseController extends Controller
     protected function resolveAuthenticatedAttributes(Request | FormRequest $request, Response $response): void
     {
         $id = (int) $response->json('data.user.id');
+        $name = $response->json('data.user.name');
         $role = $response->json('data.user.role');
 
-        app(UserService::class)->save($id, Role::from($role));
+        app(UserService::class)->save($id, $name, Role::from($role));
 
         $request->attributes->set('user_id', $id);
     }

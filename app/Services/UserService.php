@@ -9,9 +9,16 @@ use App\Models\User;
 
 class UserService
 {
-    public function save(int $id, Role $role): User
+    public function save(int $id, string $name, Role $role): User
     {
         return User::query()
-            ->updateOrCreate(['id' => $id], ['id' => $id, 'role' => $role->value]);
+            ->updateOrCreate(
+                ['id' => $id],
+                [
+                    'id' => $id,
+                    'name' => $name,
+                    'role' => $role->value,
+                ]
+            );
     }
 }
