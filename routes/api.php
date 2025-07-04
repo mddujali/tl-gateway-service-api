@@ -28,6 +28,5 @@ Route::get('profile', GetProfileController::class)
     ->middleware('jwt.verify');
 
 Route::apiResource('ip-addresses', IpAddressController::class)
-    ->except(['destroy'])
     ->parameters(['ip-addresses' => 'ip_address_id'])
     ->middleware('jwt.verify');

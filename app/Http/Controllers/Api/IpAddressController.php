@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\IpAddress\DeleteIpAddressRequest;
 use App\Http\Requests\Api\IpAddress\SaveIpAddressRequest;
 use Exception;
 use Illuminate\Http\Client\ConnectionException;
@@ -70,6 +71,24 @@ class IpAddressController extends BaseController
             serviceCall: fn () => $this->makeHttpClient($request)->put($this->baseUrl() . '/' . $ipAddressId, $data),
             successMessage: __('IP Address has been edited.'),
             errorMessage: __('Unable to edit IP Address.'),
+            context: $context
+        );
+    }
+
+    public function destroy(DeleteIpAddressRequest $request): JsonResponse
+    {
+        $ipAddressId = $request->route('ip_address_id');
+        $data = [
+            'user_id' => $request->input('user_id'),
+            'user_role' => $request->input('user_role'),
+        ];
+        $context = ['ip_address_id' => $ipAddressId];
+
+        return $this->handleRequest(
+            request: $request,
+            serviceCall: fn () => $this->makeHttpClient($request)->delete($this->baseUrl() . '/' . $ipAddressId, $data),
+            successMessage: __('IP Address has been deleted.'),
+            errorMessage: __('Unable to delete IP Address.'),
             context: $context
         );
     }
