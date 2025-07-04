@@ -33,6 +33,7 @@ class AuditLog extends Model
     {
         return [
             'context' => 'json',
+            'created_at' => 'datetime',
         ];
     }
 

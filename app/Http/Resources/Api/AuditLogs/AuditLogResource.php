@@ -7,6 +7,7 @@ namespace App\Http\Resources\Api\AuditLogs;
 use App\Http\Resources\Api\BaseJsonResource;
 use App\Http\Resources\Api\Users\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Override;
 
 /**
@@ -15,7 +16,7 @@ use Override;
  * @property-read string $type
  * @property-read string $message
  * @property-read object $context
- * @property-read string $created_at
+ * @property-read Carbon $created_at
  */
 class AuditLogResource extends BaseJsonResource
 {
