@@ -44,7 +44,7 @@ class UpdateIpAddressTest extends BaseTestCase
         ]);
     }
 
-    public function test_it_should_store_ip_address(): void
+    public function test_it_should_update_ip_address(): void
     {
         $path = 'tests/Fixtures/Api/IpAddresses/ip-address-edited.json';
         $body = file_get_contents(base_path($path));
