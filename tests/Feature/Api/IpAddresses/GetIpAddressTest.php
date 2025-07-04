@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Api\IpAddresses;
+namespace Tests\Feature\Api\IpAddresses;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Response;

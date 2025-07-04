@@ -19,6 +19,14 @@ abstract class BaseController extends Controller
     use ResponseTemplate;
     use Auditable;
 
+    protected function resolveResponse(Response $response): JsonResponse
+    {
+        return response()->json(
+            data: $response->json(),
+            status: $response->status()
+        );
+    }
+
     protected function resolveAuthenticatedAttributes(Request | FormRequest $request, Response $response): void
     {
         $id = (int) $response->json('data.user.id');
@@ -27,14 +35,6 @@ abstract class BaseController extends Controller
         app(UserService::class)->save($id, Role::from($role));
 
         $request->attributes->set('user_id', $id);
-    }
-
-    protected function resolveResponse(Response $response): JsonResponse
-    {
-        return response()->json(
-            data: $response->json(),
-            status: $response->status()
-        );
     }
 
     protected function resolveAuthenticatedResponse(Response $response): JsonResponse
