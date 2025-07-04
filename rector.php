@@ -17,7 +17,9 @@ return static function (RectorConfig $config): void {
 
     $config->phpVersion(PhpVersion::PHP_83);
 
+    $config->import(LevelSetList::UP_TO_PHP_83);
+
     $config->import(LaravelSetList::LARAVEL_120);
 
-    $config->import(LevelSetList::UP_TO_PHP_83);
+    $config->importNames();
 };
