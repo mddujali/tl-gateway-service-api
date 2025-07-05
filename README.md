@@ -1,61 +1,50 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Gateway Service API
+Expose API endpoints that bridges between `Auth Service API` and `IP Service API`.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Requirements
+- Composer 2.7.x or higher
+- 8.3.x or higher
+- Node.js 20.x.x or higher
+- Docker 20.x.x or higher
 
-## About Laravel
+## Setup
+- To install project dependencies
+    - `composer install`
+    - `npm install`
+- Copy `.env.local.example` to `.env`
+- Copy `.env.testing.example` to `.env.testing`
+- Copy `docker-compose.yml.example` to `docker-compose.yml`
+- Add `alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'` to `.bashrc` or `.zshrc`
+- Run `sail build` to build the Docker containers
+- Run `sail up` to start the Docker containers
+- Run `sail up -d` to start the Docker containers in detached mode
+- Run `sail exec app composer sail:resolve-permissions` to resolve files and folders ownership issue
+- Run `sail artisan key:generate` to create application key
+- Run `sail artisan key:generate --env=testing` to create application key for testing
+- Run `sail artisan migrate` to execute outstanding migrations
+- Run `sail artisan db:seed` to seed all tables with records
+- Run `sail artisan migrate --seed` to drop all tables and run all migrations and seed all tables with records
+- Run `sail artisan migrate:fresh --seed` to drop all tables and re-run all migrations and seed all tables with records
+- Use RSA public/private key strategy
+  - Copy `jwt.key` and `jwt.pub` to storage/oauth from Auth Service API
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Development Commands
+- Run `sail artisan ide-helper:model --nowrite` to generate PHPDocs for models
+- Run `sail artisan ide-helper:generate` to generate PHPDocs for Laravel Facades
+- Run `sail artisan ide-helper:meta` to generate PhpStorm meta file
+- Run `sail artisan test` to run the application tests
+- Add `alias pint=./vendor/bin/pint` to `.bashrc` or `.zshrc`
+- Run `pint --test` to simply inspect your code for style errors
+- Run `pint --dirty` to only modify the files that have uncommitted changes according to Git
+- Run `pint --repair` to fix any files with code style errors but also exit with a non-zero exit code if any errors were fixed
+- Run `./vendor/bin/rector process` to refactor codebase
+- Run `sail php ./vendor/bin/phpstan analyse` to analyse code with Larastan (PHPStan)
+- Run `sail composer lint` for coding style checks and fixes
+- Run `sail composer dump-autoload` to regenerate the list of all classes that need to be included in the project
+- Run `sail artisan cache:clear` to clear the cache
+- Run `sail artisan config:clear` to clear the configuration cache
+- Run `sail artisan clear-compiled` to clear the compiled classes
+- Run `sail artisan event:clear` to clear the event cache
+- Run `sail artisan route:clear` to clear the route cache
+- Run `sail artisan view:clear` to clear the view cache
+- Run `sail artisan optimize:clear` to remove all the cache files
